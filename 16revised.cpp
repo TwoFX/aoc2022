@@ -123,11 +123,13 @@ int main() {
 	dp[0][id("AA")][id("AA")][0] = 0;
 	fora(ii, 26) {
 		int i = ii % 2;
-		fora(j, n) fora(l, n) fora(k, 1 << 15) {
+		fora(j, n) fora(l, j + 1) fora(k, 1 << 15) {
 		if (dp[i][j][l][k] == inf) continue;
 		int qq = dp[i][j][l][k] + pnp[k];
 		forc(u, br[j]) forc(v, br[l]) {
-			imax(dp[(i + 1) % 2][u.first][v.first][k | u.second | v.second], qq);
+			int a = min(u.first, v.first);
+			int b = max(u.first, v.first);
+			imax(dp[(i + 1) % 2][b][a][k | u.second | v.second], qq);
 		}
 	}}
 
